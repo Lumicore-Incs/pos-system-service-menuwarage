@@ -1,6 +1,9 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.DemarcationDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.get.UserDtoGet;
+import com.example.demo.model.Demarcation;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepo;
 import com.example.demo.service.UserService;
@@ -44,17 +47,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(String id) {
+    public UserDtoGet getUserById(String id) {
         User byId = userRepo.findUserById(Long.valueOf(id));
-        return entityToDto(byId);
+        return entityToDtoGet(byId);
     }
 
     @Override
-    public List<UserDto> getAllUser() {
+    public List<UserDtoGet> getAllUser() {
         List<User> all = userRepo.findAll();
-        List<UserDto> allUsers = new ArrayList<>();
+        List<UserDtoGet> allUsers = new ArrayList<>();
         for (User user : all) {
-            UserDto userDto = entityToDto(user);
+            UserDtoGet userDto = entityToDtoGet(user);
             allUsers.add(userDto);
         }
         return allUsers;
@@ -86,5 +89,19 @@ public class UserServiceImpl implements UserService {
 
     private UserDto entityToDto(User user) {
         return (user == null) ? null : modelMapper.modelMapper().map(user, UserDto.class);
+    }
+
+    private UserDtoGet entityToDtoGet(User user) {
+        if (user==null){
+            return null;
+        }else {
+            UserDtoGet map = modelMapper.modelMapper().map(user, UserDtoGet.class);
+            map.setDemarcationDto(entityToDemarcationDto(user.getDemarcationId()));
+            return map;
+        }
+    }
+
+    private DemarcationDto entityToDemarcationDto(Demarcation demarcation) {
+        return (demarcation == null) ? null : modelMapper.modelMapper().map(demarcation, DemarcationDto.class);
     }
 }

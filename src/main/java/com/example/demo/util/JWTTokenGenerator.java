@@ -1,6 +1,7 @@
 package com.example.demo.util;
 
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.get.UserDtoGet;
 import com.example.demo.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -57,7 +58,7 @@ public class JWTTokenGenerator {
         return false;
     }
 
-    public UserDto getUserFromJwtToken(String token) {
+    public UserDtoGet getUserFromJwtToken(String token) {
         String jwtToken = token.substring("Bearer ".length());
         String id = Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(jwtToken).getBody().getId();
         return userService.getUserById(id);

@@ -21,4 +21,5 @@ public class UserDto {
     private String userName;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    private Long demarcationId;
 }
