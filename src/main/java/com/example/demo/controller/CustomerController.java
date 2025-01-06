@@ -33,7 +33,7 @@ public class CustomerController {
         }
     }
 
-    @PutMapping("search/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody CustomerDto customerDto, @RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
             CustomerDto dto = this.customerService.update(customerDto, id);
@@ -43,7 +43,7 @@ public class CustomerController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id, @RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
             CustomerDto dto = this.customerService.delete(id);

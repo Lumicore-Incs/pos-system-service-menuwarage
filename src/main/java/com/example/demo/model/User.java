@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Table(name = "users")
 @Data
 @AllArgsConstructor
@@ -24,8 +26,23 @@ public class User {
     private String userName;
     private String password;
 
+    public User(Long id, String name, String address, String email, String contact, String role, String nic, String userName, String password, Demarcation demarcationId) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.contact = contact;
+        this.role = role;
+        this.nic = nic;
+        this.userName = userName;
+        this.password = password;
+        this.demarcationId = demarcationId;
+    }
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "demarcationId")
     private Demarcation demarcationId;
 
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<Order> orders;
 }
