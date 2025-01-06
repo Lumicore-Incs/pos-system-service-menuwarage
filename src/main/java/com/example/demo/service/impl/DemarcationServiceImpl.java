@@ -1,8 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.DemarcationDto;
-import com.example.demo.dto.UserDto;
-import com.example.demo.dto.get.UserDtoGet;
 import com.example.demo.model.Demarcation;
 import com.example.demo.repository.DemarcationRepo;
 import com.example.demo.service.DemarcationService;

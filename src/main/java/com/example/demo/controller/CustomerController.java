@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CustomerDto;
-import com.example.demo.dto.DemarcationDto;
 import com.example.demo.service.CustomerService;
 import com.example.demo.util.JWTTokenGenerator;
 import com.example.demo.util.TokenStatus;

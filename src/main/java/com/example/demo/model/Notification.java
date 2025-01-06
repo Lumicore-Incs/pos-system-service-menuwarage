@@ -7,30 +7,21 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
+@Table(name = "notification")
 @Entity
-@Table(name = "orders")
-public class Order {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String massage;
     private Date date;
-    private double total;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "userId")
-    private User userId;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "customerId")
-    private Customer customerId;
-
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
-    private List<Notification> notifications;
-
+    @JoinColumn(name = "orderId")
+    private Order orderId;
 }
