@@ -2,9 +2,11 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.dto.OrderDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.dto.get.OrderDtoGet;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Order;
+import com.example.demo.model.User;
 import com.example.demo.repository.OrderRepo;
 import com.example.demo.service.OrderService;
 import com.example.demo.util.ModelMapperConfig;
@@ -55,10 +57,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDtoGet save(OrderDto order) {
+    public OrderDto save(OrderDto order) {
         Order order1 = dtoToEntity(order);
         Order save = orderRepo.save(order1);
-        return entityToGetDto(save);
+        return entityToDto(save);
     }
 
     @Override
@@ -82,6 +84,20 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private OrderDtoGet entityToGetDto(Order order) {
-        return (order == null) ? null : modelMapperConfig.modelMapper().map(order, OrderDtoGet.class);
+        if (order!=null){
+            OrderDtoGet map = modelMapperConfig.modelMapper().map(order, OrderDtoGet.class);
+            map.setCustomerId(entityToCustomerDto(order.getCustomerId()));
+            map.setUserId(entityToUserDto(order.getUserId()));
+            return map;
+        }
+        return null;
+    }
+
+    private UserDto entityToUserDto(User userId) {
+        return modelMapperConfig.modelMapper().map(userId, UserDto.class);
+    }
+
+    private CustomerDto entityToCustomerDto(Customer customerId) {
+        return (customerId == null) ? null : modelMapperConfig.modelMapper().map(customerId, CustomerDto.class);
     }
 }

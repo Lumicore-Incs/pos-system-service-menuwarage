@@ -12,7 +12,7 @@ public interface OrderService {
 
     OrderDtoGet search(Long id);
 
-    OrderDtoGet save(OrderDto order);
+    OrderDto save(OrderDto order);
 
     OrderDto update(Long id, OrderDto order);
 }

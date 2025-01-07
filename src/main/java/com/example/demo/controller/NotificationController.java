@@ -27,7 +27,7 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody NotificationDto order, @RequestHeader(name = "Authorization") String token) {
         if (jwtTokenGenerator.validateJwtToken(token)) {
-            NotificationDtoGet dto = service.save(order);
+            NotificationDto dto = service.save(order);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);

@@ -26,7 +26,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody OrderDto order, @RequestHeader(name = "Authorization")String token) {
         if (jwtTokenGenerator.validateJwtToken(token)) {
-            OrderDtoGet dto=orderService.save(order);
+            OrderDto dto=orderService.save(order);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,6 +15,6 @@ import lombok.ToString;
 public class NotificationDtoGet {
     private Long id;
     private String massage;
-    private Data date;
+    private Date date;
     private OrderDto orderId;
 }

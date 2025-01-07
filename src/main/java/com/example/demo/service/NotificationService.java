@@ -6,7 +6,7 @@ import com.example.demo.dto.get.NotificationDtoGet;
 import java.util.List;
 
 public interface NotificationService {
-    NotificationDtoGet save(NotificationDto notificationDto);
+    NotificationDto save(NotificationDto notificationDto);
 
     NotificationDto update(Long id, NotificationDto notificationDto);
 

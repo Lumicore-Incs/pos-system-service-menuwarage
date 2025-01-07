@@ -25,10 +25,10 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public NotificationDtoGet save(NotificationDto notificationDto) {
+    public NotificationDto save(NotificationDto notificationDto) {
         Notification notification = dtoToEntity(notificationDto);
         Notification save = notificationRepo.save(notification);
-        return entityToGetDto(save);
+        return entityToDto(save);
     }
 
     @Override
