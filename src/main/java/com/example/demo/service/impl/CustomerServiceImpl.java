@@ -1,9 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CustomerDto;
-import com.example.demo.dto.DemarcationDto;
 import com.example.demo.model.Customer;
-import com.example.demo.model.Demarcation;
 import com.example.demo.repository.CustomerRepo;
 import com.example.demo.service.CustomerService;
 import com.example.demo.util.ModelMapperConfig;

@@ -4,23 +4,24 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import java.util.List;
+import java.util.Date;
 
-@Table(name = "customer")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@ToString
+@Table(name = "notification")
 @Entity
-public class Customer {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String address;
-    private String contact;
-    private String nic;
+    private String massage;
+    private Date date;
 
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "orderId")
+    private Order orderId;
 }
