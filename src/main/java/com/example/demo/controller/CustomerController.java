@@ -65,7 +65,7 @@ public class CustomerController {
     @GetMapping("/search/{id}")
     public ResponseEntity<Object> search(@PathVariable Long id, @RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
-            CustomerDto dto = this.customerService.getById(id);
+            Object dto = this.customerService.getById(id);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);

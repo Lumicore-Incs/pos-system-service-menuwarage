@@ -12,5 +12,5 @@ public interface DemarcationService {
 
     List<DemarcationDto> getAll();
 
-    DemarcationDto getById(String s);
+    Object getById(String s);
 }

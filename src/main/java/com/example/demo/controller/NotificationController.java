@@ -25,9 +25,9 @@ public class NotificationController {
 
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody NotificationDto order, @RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<Object> save(@RequestBody NotificationDto notificationDto, @RequestHeader(name = "Authorization") String token) {
         if (jwtTokenGenerator.validateJwtToken(token)) {
-            NotificationDto dto = service.save(order);
+            NotificationDto dto = service.save(notificationDto);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);
@@ -35,9 +35,9 @@ public class NotificationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody NotificationDto order, @RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody NotificationDto notificationDto, @RequestHeader(name = "Authorization") String token) {
         if (jwtTokenGenerator.validateJwtToken(token)) {
-            NotificationDto dto = service.update(id, order);
+            NotificationDto dto = service.update(id, notificationDto);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);
@@ -67,7 +67,7 @@ public class NotificationController {
     @GetMapping("/search/{id}")
     private ResponseEntity<Object> search(@PathVariable Long id, @RequestHeader(name = "Authorization") String token) {
         if (jwtTokenGenerator.validateJwtToken(token)) {
-            NotificationDtoGet dto = service.search(id);
+            Object dto = service.search(id);
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);

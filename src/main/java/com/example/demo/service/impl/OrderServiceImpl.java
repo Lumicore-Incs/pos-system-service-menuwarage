@@ -51,9 +51,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDtoGet search(Long id) {
+    public Object search(Long id) {
         Optional<Order> byId = orderRepo.findById(id);
-        return byId.map(this::entityToGetDto).orElse(null);
+        if (byId.isPresent()) {
+            return entityToGetDto(byId.get());
+        }
+        return "[]";
     }
 
     @Override

@@ -14,5 +14,5 @@ public interface NotificationService {
 
     List<NotificationDtoGet> getAll();
 
-    NotificationDtoGet search(Long id);
+    Object search(Long id);
 }

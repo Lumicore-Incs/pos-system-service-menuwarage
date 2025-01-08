@@ -13,5 +13,5 @@ public interface CustomerService {
 
     List<CustomerDto> getAll();
 
-    CustomerDto getById(Long s);
+    Object getById(Long s);
 }

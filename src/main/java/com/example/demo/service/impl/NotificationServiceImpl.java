@@ -63,9 +63,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public NotificationDtoGet search(Long id) {
+    public Object search(Long id) {
         Optional<Notification> byId = notificationRepo.findById(id);
-        return byId.map(this::entityToGetDto).orElse(null);
+        if (byId.isPresent()) {
+            return entityToGetDto(byId.get());
+        }return "[]";
     }
 
     private Notification dtoToEntity(NotificationDto dto) {

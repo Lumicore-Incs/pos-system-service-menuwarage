@@ -10,7 +10,7 @@ public interface OrderService {
 
     List<OrderDtoGet> getAll();
 
-    OrderDtoGet search(Long id);
+    Object search(Long id);
 
     OrderDto save(OrderDto order);
 

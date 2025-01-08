@@ -50,9 +50,11 @@ public class DemarcationServiceImpl implements DemarcationService {
     }
 
     @Override
-    public DemarcationDto getById(String id) {
+    public Object getById(String id) {
         Optional<Demarcation> byId = demarcationRepo.findById(Long.parseLong(id));
-        return byId.map(this::entityToDto).orElse(null);
+        if (byId.isPresent()) {
+            return entityToDto(byId.get());
+        }return "[]";
     }
 
     private Demarcation dtoToEntity(DemarcationDto dto) {
