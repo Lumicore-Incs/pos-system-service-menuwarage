@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
         return (user == null) ? null : modelMapper.modelMapper().map(user, UserDto.class);
     }
 
-    private UserDtoGet entityToDtoGet(User user) {
+    public UserDtoGet entityToDtoGet(User user) {
         if (user==null){
             return null;
         }else {
