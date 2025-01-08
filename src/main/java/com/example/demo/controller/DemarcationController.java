@@ -57,7 +57,7 @@ public class DemarcationController {
     @GetMapping("/search/{id}")
     public ResponseEntity<Object> search(@PathVariable Long id, @RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
-            DemarcationDto dto = this.demarcationService.getById(String.valueOf(id));
+            Object dto = this.demarcationService.getById(String.valueOf(id));
             return new ResponseEntity<>(dto, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);

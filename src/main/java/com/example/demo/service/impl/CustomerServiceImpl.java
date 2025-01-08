@@ -65,9 +65,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getById(Long id) {
+    public Object getById(Long id) {
         Optional<Customer> byId = customerRepo.findById(id);
-        return byId.map(this::entityToDto).orElse(null);
+        if (byId.isPresent()) {
+            return entityToDto(byId.get());
+        }return "[]";
     }
 
     private Customer dtoToEntity(CustomerDto dto) {
