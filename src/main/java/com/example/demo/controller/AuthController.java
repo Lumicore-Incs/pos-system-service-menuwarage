@@ -45,18 +45,21 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public Map<String, String> postLogin(@RequestBody UserDto dto) {
+    public ResponseEntity<Map<String, String>> postLogin(@RequestBody UserDto dto) {
         UserDto user = userService.userLogin(dto);
         Map<String, String> response = new HashMap<>();
+
         if (user == null) {
-            response.put("massage", "wrong details");
+            response.put("message", "Wrong details");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         } else {
             String token = this.jwtTokenGenerator.generateJwtToken(user);
             response.put("user", user.toString());
             response.put("token", token);
+            return ResponseEntity.ok(response);
         }
-        return response;
     }
+
 
     @PostMapping("/get_user_info_by_token")
     public ResponseEntity<Object> getUserInfoByToken(@RequestHeader(name = "Authorization") String authorizationHeader) {
