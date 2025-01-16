@@ -52,6 +52,7 @@ public class AuthController {
             response.put("massage", "wrong details");
         } else {
             String token = this.jwtTokenGenerator.generateJwtToken(user);
+            response.put("user", user.toString());
             response.put("token", token);
         }
         return response;
@@ -61,7 +62,7 @@ public class AuthController {
     public ResponseEntity<Object> getUserInfoByToken(@RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
             UserDtoGet userFromJwtToken = this.jwtTokenGenerator.getUserFromJwtToken(authorizationHeader);
-            return new ResponseEntity<>(userFromJwtToken, HttpStatus.CREATED);
+            return new ResponseEntity<>(userFromJwtToken, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);
         }
@@ -81,7 +82,7 @@ public class AuthController {
     public ResponseEntity<Object> getAllUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
             List<UserDtoGet> allUsers = this.userService.getAllUser();
-            return new ResponseEntity<>(allUsers, HttpStatus.CREATED);
+            return new ResponseEntity<>(allUsers, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);
         }
@@ -91,7 +92,7 @@ public class AuthController {
     public ResponseEntity<Object> searchUser(@PathVariable Long userId, @RequestHeader(name = "Authorization") String authorizationHeader) {
         if (this.jwtTokenGenerator.validateJwtToken(authorizationHeader)) {
             UserDtoGet user = this.userService.getUserById(String.valueOf(userId));
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(TokenStatus.TOKEN_INVALID, HttpStatus.UNAUTHORIZED);
         }
