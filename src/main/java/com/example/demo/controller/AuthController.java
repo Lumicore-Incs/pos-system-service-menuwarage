@@ -51,7 +51,7 @@ public class AuthController {
 
         if (user == null) {
             response.put("message", "Wrong details");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         } else {
             String token = this.jwtTokenGenerator.generateJwtToken(user);
             response.put("user", user.toString());
