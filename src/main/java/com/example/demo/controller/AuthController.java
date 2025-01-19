@@ -45,20 +45,22 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> postLogin(@RequestBody UserDto dto) {
+    public ResponseEntity<?> postLogin(@RequestBody UserDto dto) {
         UserDto user = userService.userLogin(dto);
-        Map<String, String> response = new HashMap<>();
 
         if (user == null) {
+            Map<String, String> response = new HashMap<>();
             response.put("message", "Wrong details");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         } else {
-            String token = this.jwtTokenGenerator.generateJwtToken(user);
-            response.put("user", user.toString());
+            String token = jwtTokenGenerator.generateJwtToken(user);
+            Map<String, Object> response = new HashMap<>();
+            response.put("user", user);
             response.put("token", token);
             return ResponseEntity.ok(response);
         }
     }
+
 
 
     @PostMapping("/get_user_info_by_token")
