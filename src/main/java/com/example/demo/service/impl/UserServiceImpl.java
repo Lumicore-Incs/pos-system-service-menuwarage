@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto userLogin(UserDto dto) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        List<User> userNames = userRepo.findByUserNameAndRole(dto.getUserName(), dto.getRole());
+        List<User> userNames = userRepo.findByUserName(dto.getUserName());
         for (User name : userNames) {
             boolean isPasswordMatches = passwordEncoder.matches(dto.getPassword(), name.getPassword());
             if (isPasswordMatches) {
