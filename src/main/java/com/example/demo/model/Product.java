@@ -20,4 +20,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
+    private List<OrderDetails> orderDetails;
 }
