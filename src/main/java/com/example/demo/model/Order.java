@@ -33,4 +33,7 @@ public class Order {
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
     private List<Notification> notifications;
 
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
+    private List<OrderDetails> orderDetails;
+
 }
